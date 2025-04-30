@@ -1,4 +1,4 @@
-# FCSC 2024 Blind Attack
+# FCSC 2024 Note a Bug (d0g bUt h4ppY)
 
 Vous continuez de jouer votre premier CTF en mode Attack/Defense : c’est un peu moins la panique qu’il y a une heure, mais votre estime de vous en prend malgré tout un sacré coup. Au point que vous commencez à vous demander si le temps investi à s’entraîner sur Hackropole a servi à quelque chose…
 
@@ -40,7 +40,7 @@ Les flags sont au format *FCSC_<ascii>*.
 
 Auteur : Cryptanalyse
 
-Origine : [Blind Attack](https://hackropole.fr/fr/challenges/pwn/fcsc2024-pwn-note-a-bug-2/)
+Origine : [Note a Bug (d0g bUt h4ppY)](https://hackropole.fr/fr/challenges/pwn/fcsc2024-pwn-note-a-bug-2/)
 
 
 -----------
