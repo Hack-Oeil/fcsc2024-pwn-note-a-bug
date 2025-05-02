@@ -10,18 +10,18 @@ Votre objectif est désormais le vol des flags de trois équipes particulières 
 
 Les trois équipes ont des environnements différents :
 
-- *Red Beer* n’a pas encore patché son service.
-- *d0g bUt h4ppY* semble avoir simplement modifié l’environnement d’exécution du service pour contrer l’exploit utilisé par toutes les équipes. Votre hypothèse est qu’ils ont simplement supprimé */bin/sh* du conteneur du service. Il n’y a en effet aucune raison qu’une utilisation légitime du service ait besoin de */bin/sh* !
-- Nordic Mollusks a modifié les paramètres d’appel du service. Cette équipe a en effet remarqué que les checkers utilisés par les organisateurs ne font qu’une unique action par connexion : soit une unique écriture (*1*) pour placer le flag, soit une unique lecture (*2*) pour vérifier que le flag est bien présent. Ils ont alors décidé de n’autoriser qu’une seule action à tout le monde, ce qui empêche également l’exploit mais ne casse pas le passage des checkers.
+- ```Red Beer``` n’a pas encore patché son service.
+- ```d0g bUt h4ppY``` semble avoir simplement modifié l’environnement d’exécution du service pour contrer l’exploit utilisé par toutes les équipes. Votre hypothèse est qu’ils ont simplement supprimé ```/bin/sh``` du conteneur du service. Il n’y a en effet aucune raison qu’une utilisation légitime du service ait besoin de ```/bin/sh``` !
+- ```Nordic Mollusks``` a modifié les paramètres d’appel du service. Cette équipe a en effet remarqué que les checkers utilisés par les organisateurs ne font qu’une unique action par connexion : soit une unique écriture (```1```) pour placer le flag, soit une unique lecture (```2```) pour vérifier que le flag est bien présent. Ils ont alors décidé de n’autoriser qu’une seule action à tout le monde, ce qui empêche également l’exploit mais ne casse pas le passage des checkers.
 
 
 **Notes :**
 
-Vous êtes dans l’urgence, aucun binaire n’est fourni pour cette épreuve. Vous devez dans un premier temps exploiter l’équipe Red Beer en utilisant uniquement les données présentes dans Shovel.
-Une fois un shell obtenu chez *Red Beer*, vous pourrez exfiltrer le binaire (présent dans */app*) et progresser dans l’exploitation des deux autres équipes.
-Aucun ordre de validation n’est strictement imposé, mais nous vous conseillons de prendre les équipes ci-dessus dans l’ordre.
-Vous devez rentrer le flag trouvé pour l’équipe *XXX* dans l’épreuve qui s’intitule *Note a Bug (XXX)*.
-Les flags sont au format *FCSC_<ascii>*.
+- Vous êtes dans l’urgence, aucun binaire n’est fourni pour cette épreuve. Vous devez dans un premier temps exploiter l’équipe ```Red Beer``` en utilisant uniquement les données présentes dans Shovel.
+- Une fois un shell obtenu chez ```Red Beer```, vous pourrez exfiltrer le binaire (présent dans */app*) et progresser dans l’exploitation des deux autres équipes.
+- Aucun ordre de validation n’est strictement imposé, mais nous vous conseillons de prendre les équipes ci-dessus dans l’ordre.
+- Vous devez rentrer le flag trouvé pour l’équipe ```XXX``` dans l’épreuve qui s’intitule ```Note a Bug (XXX)```.
+- Les flags sont au format ```FCSC_<ascii>```.
 
 **Fournitures :**
 
