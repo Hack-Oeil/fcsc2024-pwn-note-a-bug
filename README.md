@@ -56,7 +56,7 @@ Shovel webapp : http://localhost:8000/
 -----------
 
 ## Ou directement avec netcat
-> nc localhost:4000
+> nc localhost 4000
 
 
 -----------
