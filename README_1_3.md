@@ -1,4 +1,4 @@
-# FCSC 2024 Note a Bug
+# FCSC 2024 Note a Bug (d0g bUt h4ppY)
 
 Vous continuez de jouer votre premier CTF en mode Attack/Defense : c’est un peu moins la panique qu’il y a une heure, mais votre estime de vous en prend malgré tout un sacré coup. Au point que vous commencez à vous demander si le temps investi à s’entraîner sur Hackropole a servi à quelque chose…
 
@@ -65,9 +65,9 @@ Shovel webapp : http://localhost:8000/
 Vous n'utilisez pas l'application **les CTFs de Cyrhades** ? C'est dommage !
 Mais voici comment installer ce CTF manuellement :
 
-> git clone https://github.com/Hack-Oeil/fcsc2024-pwn-note-a-bug-2.git
+> git clone https://github.com/Hack-Oeil/fcsc2024-pwn-note-a-bug.git
 
-> cd fcsc2024-pwn-note-a-bug-2
+> cd fcsc2024-pwn-note-a-bug
 
 
 -----------

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="fr">
+    <meta charset="UTF-8">
+    <!--Page Title-->
+    <title>Hack-Oeil - Les CTFs de Cyrhades</title>
+    <!--Meta Keywords and Description-->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" title="Favicon" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="./assets/css/github.min.css">
+    <script src="./assets/js/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Vérifie si la fenêtre est dans une iframe
+            if (window.self !== window.top) {
+                document.querySelectorAll('a').forEach((link) => {
+                    link.addEventListener('click', (event) => {
+                        const a = event.target.closest('a[href^="http"]');
+                        if (a) {
+                            event.preventDefault();
+                            window.parent.postMessage({
+                                type: "open-external",
+                                url: a.href
+                            }, "*");
+                        }
+                    });
+                });
+            }
+            // Active la coloration syntaxique :
+            if (window.hljs) {
+                hljs.highlightAll();
+            } else {
+                console.error("Highlight.js non chargé !");
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <!--Main Content Area-->
+        <main id="content">
+            <!--Ctf-->
+            <section class="ctf scrollto">
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>Challenge</h3>
+                            <h2 class="section-title">Note a Bug</h2>
+                            <p>
+                                Vous continuez de jouer votre premier CTF en mode Attack/Defense : c’est un peu moins la
+                                panique qu’il y a une heure, mais votre estime de vous en prend malgré tout un sacré
+                                coup. Au point que vous commencez à vous demander si le temps investi à s’entraîner sur
+                                Hackropole a servi à quelque chose…
+                                <br /><br />
+                                Tout n’est pas tout noir : vous commencez à maitriser les outils d’analyse réseau, les
+                                techniques de durcissement et vous soumettez même des faux flags dans les services des
+                                autres équipes pour tromper l’ennemi ! Vous avez même appris à voler les exploits des
+                                autres équipes très rapidement, sans même prendre la peine de regarder le code des
+                                services !
+                                <br /><br />
+                                En analysant les flots réseau via Shovel et en discutant avec l’un de vos coéquipiers,
+                                vous vous apercevez que vous perdez des points sur l’épreuve <strong>Note a
+                                    Bug</strong>. Ce service
+                                est visiblement un des plus simples de tout l’A/D et certaines équipes ont commencé à
+                                patcher le service pour contrer la première vague d’exploits.
+                                <br /><br />
+                                Votre objectif est désormais le vol des flags de trois équipes particulières à ce tick
+                                de jeu (dans le scénario Hackropole, il y a un seul flag par “équipe”).
+                                <br /><br />
+                                Les trois équipes ont des environnements différents :
+                                <br />
+                                - <code>Red Beer</code> n’a pas encore patché son service.<br />
+                                - <code>d0g bUt h4ppY</code> semble avoir simplement modifié l’environnement d’exécution
+                                du
+                                service pour contrer l’exploit utilisé par toutes les équipes. Votre hypothèse est
+                                qu’ils ont simplement supprimé <code>/bin/sh</code> du conteneur du service. Il n’y a en
+                                effet
+                                aucune raison qu’une utilisation légitime du service ait besoin de <code>/bin/sh</code>
+                                !<br />
+                                - <code>Nordic Mollusks</code> a modifié les paramètres d’appel du service. Cette équipe
+                                a en
+                                effet remarqué que les checkers utilisés par les organisateurs ne font qu’une unique
+                                action par connexion : soit une unique écriture (<code>1</code>) pour placer le flag,
+                                soit une
+                                unique lecture (<code>2</code>) pour vérifier que le flag est bien présent. Ils ont
+                                alors
+                                décidé de n’autoriser qu’une seule action à tout le monde, ce qui empêche également
+                                l’exploit mais ne casse pas le passage des checkers.
+                                <br /><br />
+
+                                <strong>Notes :</strong><br />
+
+                                - Vous êtes dans l’urgence, aucun binaire n’est fourni pour cette épreuve. Vous devez
+                                dans un premier temps exploiter l’équipe <code>Red Beer</code> en utilisant uniquement
+                                les
+                                données présentes dans Shovel.<br />
+                                - Une fois un shell obtenu chez <code>Red Beer</code>, vous pourrez exfiltrer le binaire
+                                (présent dans <code>/app</code>) et progresser dans l’exploitation des deux autres
+                                équipes.<br />
+                                - Aucun ordre de validation n’est strictement imposé, mais nous vous conseillons de
+                                prendre les équipes ci-dessus dans l’ordre.<br />
+                                - Vous devez rentrer le flag trouvé pour l’équipe <code>XXX</code> dans l’épreuve qui
+                                s’intitule <code>Note a Bug (XXX)</code>.<br />
+                                - Les flags sont au format <code>FCSC_&lt;ascii></code>.
+                                <br /><br />
+                                <strong>Fournitures :</strong> <br />
+                                - Shovel : http://localhost:8000/<br />
+                                - Première équipe <a target="_blank"
+                                    href="https://ctfs.cyrhades.fr/starting/ctf/430">Red Beer</a> :<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;- Service: <code>nc localhost 4000</code><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;- Flag ID : <code>ChbbgHyPqJDQy5UaJve6uUGMDQHXWtc</code>.<br />
+                                - Deuxième équipe <a target="_blank"
+                                    href="https://ctfs.cyrhades.fr/starting/ctf/429">d0g bUt h4ppY</a> :<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;- Service: <code>nc localhost 4001</code><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;- Flag ID : <code>ZBrKMnQJGebtYHDXrNxxF6hU2DzwJzX</code>.<br />
+                                - Troisième équipe <a target="_blank"
+                                    href="https://ctfs.cyrhades.fr/starting/ctf/455">Nordic Mollusks</a> :<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;- Service: <code>nc localhost 4002</code><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;- Flag ID : <code>YAu4kj47vbSDkqTEf2YttEcK88pXYpf</code>.<br />
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>FCSC 2024</h3>
+                            <h2 class="section-title">Hackropole</h2>
+                            <p class="section-subtitle">
+                                Lien officiel :
+                                <a target="_blank"
+                                    href="https://hackropole.fr/fr/challenges/pwn/fcsc2024-pwn-note-a-bug-2/">FCSC
+                                    2024 -
+                                    Note a Bug (d0g bUt h4ppY)
+                                </a>
+                                <br />
+                                Auteur: <a target="_blank" href="https://twitter.com/Cryptanalyse">Cryptanalyse</a>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>Apprentissage</h3>
+                            <h2 class="section-title">Documentations et Vidéos</h2>
+                            <p class="section-subtitle">
+                                Aucune documentation pour le moment
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>Aide</h3>
+                            <h2 class="section-title">Conseils et indices</h2>
+                            <p class="section-subtitle">
+                                <a target="_blank"
+                                    href="https://discord.com/channels/1175764392307077120/1175764601716092948">Fil sur
+                                    le Discord</a>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </section>
+            <!--End of Ctf-->
+        </main>
+        <!--End Main Content Area-->
+
+        <a id="scrollUp" href="#wrapper" style="position: fixed; z-index: 1000;"
+            aria-label="Remonter en haut de la page" title="Remonter en tête de site"></a>
+    </div>
+</body>
+
+</html>
